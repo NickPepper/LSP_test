@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Expires" content="-1" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta content="TEST :: DOM + OOP" name="description" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" name="viewport" />
+        <title>TEST :: DOM + OOP</title>
+        <!-- <link href="http://img3.imagesbn.com/resources/images/favicon.ico?cb=2.23.0" rel="shortcut icon" /> -->
+        <link type="text/css" rel="stylesheet" href="./css/LSP_test.css" />
+        <script type="text/javascript" src="./js/LSP_polyfills.js"></script>
+        <script type="text/javascript" src="./js/LSP_utils.js"></script>
+        <script type="text/javascript" src="./js/LSP_actor.js"></script>
+        <script type="text/javascript" src="./js/LSP_artist.js"></script>
+        <script type="text/javascript" src="./js/LSP_controller.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <button id="btn_simple">Создать простое</button>
+            <button id="btn_complex">Создать &laquo;хитрое&raquo;</button>
+            <button id="btn_bonus">Показать бонусные печенюшки</button>
+
+            <div id="main">
+                <div class="delimiter">&nbsp;</div>
+                <div>
+                    ВОПРОС 7 (dom + oop):<br/>
+                    делаем страничку, где происходит следующее:<br/>
+                    две кнопки слева вверху типа "создать". они занимаются созданием "окошек".<br/>
+                    окошко - это просто небольшой прямоугольник, справа вверху него должен быть крестик.<br/>
+                    окошко может быть пустым (с крестиком и всё), a может быть более хитрым (с полем ввода и кнопкой.<br/>
+                    кнопка должна отобразить в алерте или в console.log содержимое поля ввода).<br/>
+                    <br/>
+                    страница должна работать так - кнопки создать создают окошки своего типа, одна кнопка создает окошко первого типа (только с крестиком), другая создает окошко с полем ввода (и с крестиком, разумеется, тоже).<br/>
+                    окошко должно появиться в рандомном месте страницы.<br/>
+                    окошек может быть создано сколько угодно, при этом всё должно работать (крестики должны закрывать свои окошки, кнопки в кнопочных окошках должны показывать cодержимое поля ввода своего окошка).<br/>
+                    <br/>
+                    <strike>оевреивается</strike> ожидается ооп-код для окошек, с наследованием, события должны быть навешены с использованием методов объектов.<br/>
+                    <br/>
+                    <br/>
+                    ОТВЕТ: &laquo;Нажмии-и-и-и на кноопку, получишь результаа-а-т...&raquo;<br/>
+                    Тестировал во всех броузерах под Mac OS (from &laquo;Yosemite&raquo; till to &laquo;High Sierra&raquo;). Под маздаем не тестировал (в лом), но &laquo;спинным мозгом чую&raquo;&nbsp;&ndash; даже в древних ослах всё будет работать ОК.<br/>
+                    <small><strong>P.S. Я прекрасно в курсе repaint/reflow и т.п. вещей, но в данном конкретном случае считаю излишним париться на их тему, поэтому реализовано так, как реализовано&nbsp;&ndash; легко и быстро ;)</strong></small>
+                </div>
+            </div>
+
+            <div id="bonus">
+                <div class="delimiter">&nbsp;</div>
+                <div>
+                    ВОПРОС 5:<br/>
+                    написать функцию getPow(n), которая вернет функцию, возвращающую n-ю степень числового аргумента. т.е. чтобы можно было выполнить такой код:<br/>
+                    pow2 = getPow(2);<br/>
+                    x = pow2(5); // x == 25<br/>
+                    pow3 = getPow(3);<br/>
+                    y = pow3(3); // y == 27<br/>
+                    <br/>
+                    ОТВЕТ:<br/>
+                    Отличный вопрос!<br/>
+                    Взбиваем в миксере стакан каррирования, 100 граммов анонимной функции, щепотку замыкания, чайную ложку биндинга контекста, после чего <strike>посылаем</strike> приправляем Math'ом по вкусу :)<br/>
+                    <pre>
+function getPow(n) {
+    return function(n, num) {
+        return Math.pow(num, n);
+    }.bind(null, n);
+}
+                    </pre>
+                    <i>(здесь вместо null можно забайндить и на this - в данном случае это монопенисуально)</i><br/>
+                    <br/>
+                    <strong>P.S. У меня просто реально очень мало памяти в голове&nbsp;&ndash; старая машинка-то уже...</strong>
+                </div>
+                <div class="delimiter">&nbsp;</div>
+                <div class="delimiter">&nbsp;</div>
+                <div>
+                    <strong>BONUS</strong> (курить натощак 3 раза в день вместо еды):<br/>
+                    <a href="./js/LSP_utils.js" target="_blank"><strong>Примерный</strong> код для работы с <strike>пулемётными</strike> очередями в JavaScript</a> (говорили об этом, но я тогда сразу его не нашёл в моих гигантских архивах&nbsp;&mdash; см. там win.utils.queue)
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
