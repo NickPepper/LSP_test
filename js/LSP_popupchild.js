@@ -1,27 +1,28 @@
 // let it be in global scope if you don't mind?
-window.Artist = (function() {
+window.PopupChild = (function() {
     'use strict';
 
-    function Artist(params) {
-        // check dependencies at first
-        if(!utils) {
-            throw new Error('Our brilliant Artist requires the utils.js!');
-        }
-        if(!window.Actor) {
-            throw new Error('Our brilliant Artist requires the LSP_actor.js!');
-        }
-
-        // call super constructor
-        Actor.call(this, params);
+    // check dependencies at first
+    if(!utils) {
+        throw new Error('PopupChild requires the utils.js!');
+    }
+    if(!window.Popup) {
+        throw new Error('PopupChild requires the LSP_popup.js!');
     }
 
-    Artist.prototype = Object.create(Actor.prototype);
-    Artist.prototype.constructor = Artist;
+
+    function PopupChild(params) {
+        // call super constructor
+        Popup.call(this, params);
+    }
+
+    PopupChild.prototype = Object.create(Popup.prototype);
+    PopupChild.prototype.constructor = PopupChild;
 
     /*
      * Override the super methods
      */
-    Artist.prototype.durDOM = function(params) {
+    PopupChild.prototype.durDOM = function(params) {
         this.ui.container.appendChild(this.ui.frame);
         this.ui.frame.contentDocument.write("\
             <html>\
@@ -56,7 +57,7 @@ window.Artist = (function() {
     };
 
 
-    Artist.prototype.initEventHandlers = function() {
+    PopupChild.prototype.initEventHandlers = function() {
         this.ui.frame.contentDocument.getElementsByTagName("span")[0].addEventListener('click', function(event) {
             this.cancelEvent(event);
             this.ui.container.removeChild(this.ui.frame);
@@ -70,5 +71,5 @@ window.Artist = (function() {
     };
 
 
-    return Artist;
+    return PopupChild;
 })();

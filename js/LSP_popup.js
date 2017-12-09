@@ -1,18 +1,19 @@
 // let it be in global scope if you don't mind?
-window.Actor = (function() {
+window.Popup = (function() {
     'use strict';
 
-    function Actor(params) {
-        // check dependencies at first
-        if(!utils) {
-            throw new Error('Our brilliant Actor requires the utils.js!');
-        }
+    // check dependencies at first
+    if(!utils) {
+        throw new Error('Popup requires the utils.js!');
+    }
 
+
+    function Popup(params) {
         /*
          * check params
          */
         if(!utils.isElement(params.container)) {
-            throw new Error("Actor requires container element to be a DOM node!");
+            throw new Error("Popup requires container element to be a DOM node!");
         }
 
         /*
@@ -22,7 +23,7 @@ window.Actor = (function() {
             container: params.container || document.body,
             frame: utils.node('iframe', {attr: {
                 frameBorder: 0,
-                'class': 'actor-frame'
+                'class': 'popup-frame'
             }})
         };
 
@@ -41,7 +42,7 @@ window.Actor = (function() {
 
 
 
-    Actor.prototype = {
+    Popup.prototype = {
 
         /************
          * private
@@ -84,7 +85,7 @@ window.Actor = (function() {
             this.ui.frame.contentDocument.close();
             // TODO: ?
             // let the max values for random be hardcoded as 700 for now, because
-            // I am too lazy to calculate the window.innerWidth or similar as well as aspect ratio on resize
+            // I am too lazy to calculate the window.clientWidth or similar as well as aspect ratio on resize
             this.ui.frame.style.left = params.left || utils.getRandomInt(0, 700) + "px";
             this.ui.frame.style.top = params.top || utils.getRandomInt(0, 700) + "px";
         },
@@ -98,5 +99,5 @@ window.Actor = (function() {
         }
     };
 
-    return Actor;
+    return Popup;
 })();

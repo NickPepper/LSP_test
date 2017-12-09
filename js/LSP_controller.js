@@ -16,26 +16,27 @@
         },
 
         MODEL = {
-            // we don't need any Model for now
+            // although we don't have any Model yet
         },
 
         Init = function() {
             // check dependencies at first
             if(!win.utils) {
-                throw new Error('Our brilliant App requires the utils.js!');
+                throw new Error('appController requires the utils.js!');
             }
-            if(!win.Actor) {
-                throw new Error('Our brilliant App requires the LSP_actor.js!');
+            if(!win.Popup) {
+                throw new Error('appController requires the LSP_popup.js!');
             }
-            if(!win.Artist) {
-                throw new Error('Our brilliant App requires the LSP_artist.js!');
+            if(!win.PopupChild) {
+                throw new Error('appController requires the LSP_popupchild.js!');
             }
 
+            // well, init
             this.initDOMElements();
             this.attachListeners();
         },
 
-        prot = {
+        shprot = {
 
             /**
              * Link all needed DOM-elements for later use.
@@ -43,10 +44,25 @@
              */
             initDOMElements: function() {
                 DOM.btnSimple   = doc.getElementById("btn_simple");
+                if(!DOM.btnSimple) {
+                    throw new Error('DOM.btnSimple must be a DOM-Element!');
+                }
                 DOM.btnComplex  = doc.getElementById("btn_complex");
+                if(!DOM.btnComplex) {
+                    throw new Error('DOM.btnComplex must be a DOM-Element!');
+                }
                 DOM.btnBonus    = doc.getElementById("btn_bonus");
+                if(!DOM.btnBonus) {
+                    throw new Error('DOM.btnBonus must be a DOM-Element!');
+                }
                 DOM.divMain     = doc.getElementById("main");
+                if(!DOM.divMain) {
+                    throw new Error('DOM.divMain must be a DOM-Element!');
+                }
                 DOM.divBonus    = doc.getElementById("bonus");
+                if(!DOM.divBonus) {
+                    throw new Error('DOM.divBonus must be a DOM-Element!');
+                }
             },
 
 
@@ -59,7 +75,7 @@
                 doc.addEventListener("click", function(e) {
                     var eid = e.target.getAttribute("id");
                     if(e.target.nodeName.toLowerCase() === "button" && eid) {
-                        e = prot.cancelEvent(e);
+                        e = shprot.cancelEvent(e);
                         switch(eid) {
                             case "btn_bonus":
                                 DOM.divMain.style.display = "none";
@@ -69,13 +85,13 @@
                             case "btn_simple":
                                 DOM.divBonus.style.display = "none";
                                 DOM.divMain.style.display = "block";
-                                this.xep = new Actor({container: DOM.divMain});
+                                this.actor = new Popup({container: DOM.divMain});
                                 break;
 
                             case "btn_complex":
                                 DOM.divBonus.style.display = "none";
                                 DOM.divMain.style.display = "block";
-                                this.xep = new Artist({container: DOM.divMain});
+                                this.actor = new PopupChild({container: DOM.divMain});
                                 break;
 
                             default:
@@ -113,11 +129,11 @@
 
         };
 
-        Init.prototype = prot;
+        Init.prototype = shprot;
 
         // Public Interface
         return {
-            standUp: prot.standUp
+            standUp: shprot.standUp
         };
 
     })();
